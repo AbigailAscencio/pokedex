@@ -33,9 +33,13 @@ h1 {
   background-color: white;
   box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
 }
+.pokemon-block-back{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 
 .img-container {
-  background-image: url("./blob.svg");
+  background-image: url("./src/poke.png");
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -90,8 +94,11 @@ h1 {
   top: 0%;
 }
 
-.stat-container {
+.informacion-container {
   display: grid;
-  grid-template-columns: 1fr 2fr;
   text-align: left;
+  font-weight: normal;
+  font-size: 1.0rem;
+  margin-left: 50px;
+  margin-top: 5px;
 }
