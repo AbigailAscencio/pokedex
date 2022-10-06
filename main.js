@@ -3,19 +3,19 @@ const spinner = document.querySelector("#spinner"); // tarerlo por ID
 const previous = document.querySelector("#previous");// traer los botones por ID
 const next = document.querySelector("#next");//  traer los botones por ID
 
-let limit = 11;
+let limit = 14;
 let idPokemon = 1;
 
 previous.addEventListener("click", () => {
   if (idPokemon != 1) { // que no sea igual a 1 porque si estamos en la pagina 1 ya no podemos regresar mas
-    idPokemon -= 12;
+    idPokemon -= 15;
     removeChildNodes(pokemonContainer); // Llamamos la funcion para remover los pokemones de la pagina
     fetchPokemons(idPokemon, limit);
   }
 });
 
 next.addEventListener("click", () => {
-  idPokemon += 12;
+  idPokemon += 15;
   removeChildNodes(pokemonContainer);
   fetchPokemons(idPokemon, limit);
 });
@@ -53,10 +53,10 @@ function createPokemon(pokemon) { // craciones de las tarjetas
   spriteContainer.classList.add("img-container");
 
   const sprite = document.createElement("img"); // Traer la imagen 
+  sprite.loading ="lazy"; // lazy loading atributo de HTML
   sprite.src = pokemon.sprites.front_default; // trae la url de la imagen de la API con la ruta sprite y front_default 
-
+ 
   spriteContainer.appendChild(sprite); // añadir el hijo
-
   const number = document.createElement("p");// agregar parrafo para el id del pokemon 
   number.textContent = `ID: ${pokemon.id}`;  //URL de donde traera el ID de la API
 
@@ -64,9 +64,13 @@ function createPokemon(pokemon) { // craciones de las tarjetas
   name.classList.add("name"); 
   name.textContent = pokemon.name; //URL de donde traera el ID de la API
 
-  card.appendChild(spriteContainer); // agregarlos a la tarjeta
-  card.appendChild(number);
+  //card.appendChild(spriteContainer); // agregarlos a la tarjeta
+  //card.appendChild(number);
+  //card.appendChild(name);
   card.appendChild(name);
+  card.appendChild(spriteContainer);
+  card.appendChild(number);
+
 
   // creacion de la parte de atras de la carta(flip-card)
   const cardBack = document.createElement("div");//div de la carta de atras
@@ -76,6 +80,7 @@ function createPokemon(pokemon) { // craciones de las tarjetas
 
   cardBack.appendChild(habilidades(pokemon.abilities));
   cardBack.appendChild(pesos(pokemon.weight));
+  cardBack.appendChild(alturas(pokemon.height));
 
   cardContainer.appendChild(card); // agregarlos a la tarjeta
   cardContainer.appendChild(cardBack);
@@ -119,6 +124,24 @@ function pesos(weight) {
   }
 
   return weightContainer;
+}
+function alturas(height) {
+  const heightContainer = document.createElement("div");
+  heightContainer.classList.add("informacion-container");
+  for (let i = 0; i < 1; i++) {
+    const altura = height[i];
+
+    const alturaContainer = document.createElement("informacion-container");
+    alturaContainer.classList.add("informacion-container");
+
+    const alturaName = document.createElement("p");
+    alturaName.textContent = `Altura: ${height} mts` ;
+
+    alturaContainer.appendChild(alturaName);
+    heightContainer.appendChild(alturaContainer);
+  }
+
+  return heightContainer;
 }
 
 function removeChildNodes(parent) { // remover los elementos de la paginacion 
